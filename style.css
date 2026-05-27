@@ -78,6 +78,7 @@ body {
 .top-photo {
   width: 100%;
   background: #2b0f0f;
+  position: relative;
 }
 
 .top-photo img {
@@ -110,6 +111,12 @@ body {
   line-height: 1.7;
 }
 
+.hero-actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
 .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -119,6 +126,19 @@ body {
   padding: .75rem 1.1rem;
   border-radius: 8px;
   font-weight: 700;
+}
+
+.photo-history-btn {
+  position: absolute;
+  right: clamp(12px, 4vw, 32px);
+  bottom: clamp(38px, 8vw, 72px);
+  background: rgba(122, 16, 16, 0.58);
+  color: #fff;
+  text-decoration: none;
+  padding: .55rem .85rem;
+  border-radius: 9px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .btn.light { background: #fff; color: #111; }
@@ -150,6 +170,70 @@ body {
 
 .players {
   background: linear-gradient(180deg, #fff6f6, #ffe8e8);
+}
+
+.honors {
+  background: linear-gradient(180deg, #fff2f2, #ffe1e1);
+}
+
+.honor-accordion {
+  display: grid;
+  gap: 1rem;
+}
+
+.honor-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.honor-toggle {
+  width: 100%;
+  border: 0;
+  background: #fff;
+  color: #7a1010;
+  font-weight: 800;
+  font-size: 1.17em;
+  text-align: left;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.honor-toggle::after {
+  content: "+";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.honor-toggle.active::after {
+  content: "-";
+}
+
+.honor-panel {
+  display: none;
+  padding: 0 1.1rem 1rem;
+}
+
+.honor-panel.active {
+  display: block;
+}
+
+.honor-list {
+  margin: .3rem 0 0;
+  padding-left: 1.1rem;
+  line-height: 1.7;
+}
+
+.honor-list li {
+  margin-bottom: .35rem;
+}
+
+.champion {
+  color: #c21717;
+  font-weight: 800;
 }
 
 .player-switch {
@@ -205,6 +289,14 @@ body {
 .news-list {
   display: grid;
   gap: .9rem;
+}
+
+.section-news {
+  background: linear-gradient(180deg, #fff8f8, #ffeaea);
+}
+
+.section-photo-history {
+  background: linear-gradient(180deg, #fff3f3, #ffe6e6);
 }
 
 .cta {
@@ -269,6 +361,11 @@ body {
     flex-direction: column;
   }
   .nav.open { display: flex; }
+  .photo-history-btn {
+    right: 12px;
+    bottom: 34px;
+    font-size: .9rem;
+  }
 }
 
 .copy-icon {

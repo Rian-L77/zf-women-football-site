@@ -5,6 +5,7 @@ const playerPanels = document.querySelectorAll('.player-panel');
 const copyWechatBtn = document.getElementById('copyWechatBtn');
 const wechatId = document.getElementById('wechatId');
 const copyTip = document.getElementById('copyTip');
+const honorToggles = document.querySelectorAll('.honor-toggle');
 
 menuBtn?.addEventListener('click', () => {
   nav.classList.toggle('open');
@@ -18,6 +19,18 @@ switchBtns.forEach((btn) => {
     btn.classList.add('active');
     const target = btn.getAttribute('data-target');
     document.getElementById(target)?.classList.add('active');
+  });
+});
+
+honorToggles.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.getAttribute('data-target');
+    const panel = document.getElementById(targetId);
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+    btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    btn.classList.toggle('active', !expanded);
+    panel?.classList.toggle('active', !expanded);
   });
 });
 

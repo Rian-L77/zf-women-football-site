@@ -17,9 +17,11 @@
       <a class="brand" href="#home">政法女足</a>
       <nav class="nav" id="nav">
         <a href="#about">球队</a>
+        <a href="#honors">荣誉</a>
         <a href="#players">球员</a>
         <a href="#schedule">赛程</a>
         <a href="#news">新闻</a>
+        <a href="#photo-history">合照</a>
         <a href="#join">加入我们</a>
       </nav>
       <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
@@ -38,6 +40,7 @@
         width="1200"
         height="799"
       />
+      <a class="photo-history-btn" href="#photo-history">查看历年合照</a>
     </section>
 
     <section class="hero">
@@ -46,7 +49,10 @@
         <p class="tag">ZFLAW WOMEN FOOTBALL CLUB</p>
         <h1>热爱无畏，奔跑有光</h1>
         <p class="hero-sub">政法女足以纪律、拼搏与团队精神，书写属于我们的绿茵故事。</p>
-        <a class="btn" href="#schedule">查看近期赛程</a>
+        <div class="hero-actions">
+          <a class="btn" href="#schedule">查看近期赛程</a>
+          <a class="btn" href="#honors">查看所获荣誉</a>
+        </div>
       </div>
     </section>
 
@@ -61,6 +67,57 @@
           <article class="card">
             <h3>训练时间</h3>
             <p>每周一、二、四 16:00-18:00。地点：军都山十万人大球场。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section honors" id="honors">
+      <div class="container">
+        <h2>所获荣誉</h2>
+        <div class="honor-accordion">
+          <article class="card honor-item">
+            <button class="honor-toggle" type="button" data-target="honorNational" aria-expanded="false">全国级比赛</button>
+            <div class="honor-panel" id="honorNational">
+            <ul class="honor-list">
+              <li>2024年 全国青少年校园足球联赛 女子校园组 第四名</li>
+              <li>2023年 第二届中国大学生沙滩足球锦标赛 女子组 第八名</li>
+              <li>2019年 全国青少年校园足球联赛 大学女子校园组 第八名</li>
+              <li>2017年 全国女子大学生室内五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2016年 全国女子大学生室内五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2015年 全国女子大学生室内五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+            </ul>
+            </div>
+          </article>
+          <article class="card honor-item">
+            <button class="honor-toggle" type="button" data-target="honorBeijing" aria-expanded="false">北京市级比赛</button>
+            <div class="honor-panel" id="honorBeijing">
+            <ul class="honor-list">
+              <li>2023年 首都大学生足球联赛（女子乙组）<span class="champion">冠军</span></li>
+              <li>2021年 首都大学生足球联赛（女子乙组）<span class="champion">冠军</span></li>
+              <li>2021年 首都大学生女子五人制足球锦标赛（乙级）季军</li>
+              <li>2020年 首都大学生足球联赛 女子乙组 <span class="champion">冠军</span></li>
+              <li>2020年 首都大学生五人制足球联赛 女子校园组 <span class="champion">冠军</span></li>
+              <li>2019年 首都大学生女子足球联赛 女子组 <span class="champion">冠军</span></li>
+              <li>2019年 第六届海峡两岸暨港澳大学生运动交流赛 女子组 季军</li>
+              <li>2019年 首都大学生女子五人制足球锦标赛 女子乙组 <span class="champion">冠军</span></li>
+              <li>2018年 首都大学生女子足球联赛 乙组 <span class="champion">冠军</span></li>
+              <li>2018年 首都大学生女子五人制足球锦标赛 校园组 季军</li>
+              <li>2017年 首都高校女子足球联赛 校园组 <span class="champion">冠军</span></li>
+              <li>2017年 首都大学生女子五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2017年 第四届海峡两岸暨港澳大学生运动交流赛 女子组 季军</li>
+              <li>2016年 首都高校女子足球联赛 校园组 <span class="champion">冠军</span></li>
+              <li>2016年 首都大学生女子五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2015年 首都高等院校大学生女子足球锦标赛 校园组 亚军</li>
+              <li>2015年 首都大学生女子五人制足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2014年 首都高校女子足球锦标赛 校园组 季军</li>
+              <li>2013年 首都高校女子足球联赛 校园组 <span class="champion">冠军</span></li>
+              <li>2012年 首都高校女子足球锦标赛 校园组 亚军</li>
+              <li>2011年 首都高校女子足球锦标赛 校园组 <span class="champion">冠军</span></li>
+              <li>2010年 首都高校女子足球锦标赛 乙组 <span class="champion">冠军</span></li>
+              <li>2009年 北京市大学生女子足球锦标赛 乙组 <span class="champion">冠军</span></li>
+            </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -108,13 +165,25 @@
       </div>
     </section>
 
-    <section class="section" id="news">
+    <section class="section section-news" id="news">
       <div class="container">
         <h2>球队新闻</h2>
         <div class="news-list">
           <article class="news-item">
             <h3>敬请期待</h3>
             <p>球队新闻内容正在整理中，后续将第一时间更新。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-photo-history" id="photo-history">
+      <div class="container">
+        <h2>历年合照</h2>
+        <div class="news-list">
+          <article class="news-item">
+            <h3>内容整理中</h3>
+            <p>历年合照正在归档整理，敬请期待。</p>
           </article>
         </div>
       </div>
@@ -133,6 +202,7 @@
         <p class="copy-tip" id="copyTip">点击图标复制微信号</p>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
