@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>政法女足 | 官方网站</title>
+  <meta name="description" content="政法女足官方网站，包含球队介绍、赛程、球员与新闻信息。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home">政法女足</a>
+      <nav class="nav" id="nav">
+        <a href="#about">球队</a>
+        <a href="#players">球员</a>
+        <a href="#schedule">赛程</a>
+        <a href="#news">新闻</a>
+        <a href="#join">加入我们</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="打开菜单">☰</button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="tag">ZFLAW WOMEN FOOTBALL CLUB</p>
+        <h1>热爱无畏，奔跑有光</h1>
+        <p class="hero-sub">政法女足以纪律、拼搏与团队精神，书写属于我们的绿茵故事。</p>
+        <a class="btn" href="#schedule">查看近期赛程</a>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2>球队介绍</h2>
+        <div class="grid two">
+          <article class="card">
+            <h3>球队理念</h3>
+            <p>在训练中求严谨，在比赛中求坚韧。我们鼓励每一位队员在团队中成长，在赛场上发光。</p>
+          </article>
+          <article class="card">
+            <h3>训练时间</h3>
+            <p>每周一、二、四 16:00-18:00。地点：法大标准足球场。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section players" id="players">
+      <div class="container">
+        <h2>球员介绍</h2>
+
+        <div class="player-switch" role="tablist" aria-label="球员状态切换">
+          <button class="switch-btn active" id="activeBtn" type="button" data-target="activePanel">现役</button>
+          <button class="switch-btn" id="retiredBtn" type="button" data-target="retiredPanel">退役</button>
+        </div>
+
+        <div class="player-panel active" id="activePanel">
+          <div class="grid two role-grid">
+            <article class="card role-card"><h3>前锋</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>中场</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>后卫</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>门将</h3><p>数据调试中</p></article>
+          </div>
+        </div>
+
+        <div class="player-panel" id="retiredPanel">
+          <div class="grid two role-grid">
+            <article class="card role-card"><h3>前锋</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>中场</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>后卫</h3><p>数据调试中</p></article>
+            <article class="card role-card"><h3>门将</h3><p>数据调试中</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="schedule">
+      <div class="container">
+        <h2>近期赛程</h2>
+        <div class="grid one">
+          <article class="match">
+            <p class="date">本周五 16:00-18:00</p>
+            <h3>政法女足 vs 女院女足</h3>
+            <p>校联赛 · 对抗赛</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <h2>球队新闻</h2>
+        <div class="news-list">
+          <article class="news-item">
+            <h3>敬请期待</h3>
+            <p>球队新闻内容正在整理中，后续将第一时间更新。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" id="join">
+      <div class="container cta-wrap">
+        <h2>加入政法女足</h2>
+        <p>无论你是初学者还是有比赛经验，只要你热爱足球，我们都欢迎你。</p>
+        <a class="btn light" href="mailto:team@zfwomenfc.edu">发送报名邮件</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 政法女足 官方网站</p>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
