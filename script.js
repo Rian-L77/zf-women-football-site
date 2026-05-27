@@ -2,6 +2,9 @@ const menuBtn = document.getElementById('menuBtn');
 const nav = document.getElementById('nav');
 const switchBtns = document.querySelectorAll('.switch-btn');
 const playerPanels = document.querySelectorAll('.player-panel');
+const copyWechatBtn = document.getElementById('copyWechatBtn');
+const wechatId = document.getElementById('wechatId');
+const copyTip = document.getElementById('copyTip');
 
 menuBtn?.addEventListener('click', () => {
   nav.classList.toggle('open');
@@ -16,4 +19,29 @@ switchBtns.forEach((btn) => {
     const target = btn.getAttribute('data-target');
     document.getElementById(target)?.classList.add('active');
   });
+});
+
+copyWechatBtn?.addEventListener('click', async () => {
+  const text = wechatId?.textContent?.trim() || 'Dream_Lars';
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      copyTip.textContent = '复制成功';
+      return;
+    }
+
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.style.position = 'fixed';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(area);
+    copyTip.textContent = ok ? '复制成功' : '复制失败，请手动复制: ' + text;
+  } catch {
+    copyTip.textContent = '复制失败，请手动复制: ' + text;
+  }
 });

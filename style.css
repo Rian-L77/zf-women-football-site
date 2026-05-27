@@ -62,7 +62,7 @@ body {
 }
 
 .hero {
-  min-height: 72vh;
+  min-height: 44vh;
   position: relative;
   display: grid;
   place-items: center;
@@ -71,6 +71,21 @@ body {
     radial-gradient(circle at 20% 20%, rgba(255,255,255,.22), transparent 50%),
     #2b0f0f;
   color: #fff;
+  margin-top: -24px;
+  padding-bottom: 70px;
+}
+
+.top-photo {
+  width: 100%;
+  background: #2b0f0f;
+}
+
+.top-photo img {
+  display: block;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  height: auto;
+  object-fit: cover;
 }
 
 .hero-content {
@@ -198,6 +213,40 @@ body {
   text-align: center;
 }
 
+.wechat-box {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: rgba(255, 255, 255, 0.12);
+  padding: .55rem .8rem;
+  border-radius: 10px;
+}
+
+.wechat-text {
+  font-size: 1rem;
+}
+
+.copy-btn {
+  border: 0;
+  background: #fff;
+  color: #7a1010;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-tip {
+  margin: .7rem 0 0;
+  font-size: .92rem;
+  color: #ffe4e4;
+}
+
 .footer {
   background: #3a0b0b;
   color: #c9d5e5;
@@ -220,4 +269,33 @@ body {
     flex-direction: column;
   }
   .nav.open { display: flex; }
+}
+
+.copy-icon {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+.copy-icon::before,
+.copy-icon::after {
+  content: "";
+  position: absolute;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  width: 10px;
+  height: 10px;
+}
+
+.copy-icon::before {
+  top: 2px;
+  left: 2px;
+  opacity: .75;
+}
+
+.copy-icon::after {
+  top: -1px;
+  left: -1px;
+  background: #fff;
 }
