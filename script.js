@@ -26,7 +26,7 @@ const photoData = {
   '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg', size: '8.4MB' }]
 };
 
-const photoVersion = '?v=20260529b';
+const photoVersion = '?v=20260529c';
 const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
@@ -169,6 +169,16 @@ photoNext?.addEventListener('click', () => {
   if (list.length <= 1) return;
   currentIndex = (currentIndex + 1) % list.length;
   renderPhoto();
+});
+
+photoDownloadOriginal?.addEventListener('click', (e) => {
+  e.preventDefault();
+  const temp = document.createElement('a');
+  temp.href = currentOriginal;
+  temp.setAttribute('download', currentOriginal.split('/').pop() || 'photo.jpg');
+  document.body.appendChild(temp);
+  temp.click();
+  document.body.removeChild(temp);
 });
 
 renderYearButtons();
