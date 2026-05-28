@@ -358,6 +358,12 @@ body {
   margin: .7rem 0 0;
 }
 
+.photo-download-note {
+  margin: .35rem 0 0;
+  color: #8f1212;
+  font-size: .9rem;
+}
+
 .photo-actions a {
   color: #8f1212;
   font-weight: 700;

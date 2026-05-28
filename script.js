@@ -26,7 +26,7 @@ const photoData = {
   '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg', size: '8.4MB' }]
 };
 
-const photoVersion = '?v=20260528i';
+const photoVersion = '?v=20260529a';
 const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
@@ -142,7 +142,9 @@ function renderPhoto() {
   };
 
   if (photoDownloadOriginal) {
-    photoDownloadOriginal.href = currentOriginal + photoVersion;
+    // WeChat built-in browser often fails to recognize files when using `download` or cache-busting query.
+    // Keep a plain image URL so it opens as an image file reliably for save/share.
+    photoDownloadOriginal.href = currentOriginal;
     photoDownloadOriginal.textContent = `点击下载原图（${currentSize}）`;
   }
 
