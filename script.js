@@ -8,43 +8,39 @@ const copyTip = document.getElementById('copyTip');
 const honorToggles = document.querySelectorAll('.honor-toggle');
 
 const photoData = {
-  '2026': [{ web: './lite-hero-main.jpg', save: './save-hero-main.jpg', original: './hero-main.jpg' }],
-  '2025': [{ web: './lite-photo-2025-1.jpg', save: './save-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
+  '2026': [{ web: './lite-hero-main.jpg', original: './photo-2026-1.jpg', size: '21MB' }],
+  '2025': [{ web: './lite-photo-2025-1.jpg', original: './photo-2025-1.jpg', size: '5.7MB' }],
   '2024': [
-    { web: './lite-photo-2024-1.jpg', save: './save-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
-    { web: './lite-photo-2024-2.jpg', save: './save-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
-    { web: './lite-photo-2024-3.jpg', save: './save-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
+    { web: './lite-photo-2024-1.jpg', original: './photo-2024-1.jpg', size: '15MB' },
+    { web: './lite-photo-2024-2.jpg', original: './photo-2024-2.jpg', size: '14MB' },
+    { web: './lite-photo-2024-3.jpg', original: './photo-2024-3.jpg', size: '17MB' }
   ],
   '2023': [
-    { web: './lite-photo-2023-1.jpg', save: './save-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
-    { web: './lite-photo-2023-2.jpg', save: './save-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
+    { web: './lite-photo-2023-1.jpg', original: './photo-2023-1.jpg', size: '6.5MB' },
+    { web: './lite-photo-2023-2.jpg', original: './photo-2023-2.jpg', size: '1.1MB' }
   ],
   '2022': [
-    { web: './lite-photo-2022-1.jpg', save: './save-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
-    { web: './lite-photo-2022-2.jpg', save: './save-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
+    { web: './lite-photo-2022-1.jpg', original: './photo-2022-1.jpg', size: '13MB' },
+    { web: './lite-photo-2022-2.jpg', original: './photo-2022-2.jpg', size: '464KB' }
   ],
-  '2021': [{ web: './lite-photo-2021-1.jpg', save: './save-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
+  '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg', size: '8.4MB' }]
 };
 
-const photoVersion = '?v=20260528e';
+const photoVersion = '?v=20260528h';
 const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
 let currentIndex = 0;
-let currentSave = './save-hero-main.jpg';
+let switchingPhoto = false;
 let currentOriginal = './hero-main.jpg';
+let currentSize = '316KB';
 
 const yearsWrap = document.getElementById('photoYears');
 const photoDisplay = document.getElementById('photoDisplay');
-const photoOriginal = document.getElementById('photoOriginal');
+const photoDownloadOriginal = document.getElementById('photoDownloadOriginal');
 const photoPrev = document.getElementById('photoPrev');
 const photoNext = document.getElementById('photoNext');
 const photoEmpty = document.getElementById('photoEmpty');
-const photoModal = document.getElementById('photoModal');
-const photoModalMask = document.getElementById('photoModalMask');
-const photoModalClose = document.getElementById('photoModalClose');
-const photoModalImage = document.getElementById('photoModalImage');
-const photoSaveOriginal = document.getElementById('photoSaveOriginal');
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -99,11 +95,10 @@ function preloadUrl(url) {
   preloadCache.add(url);
 }
 
-function warmupYear(year) {
-  const list = photoData[year] || [];
-  list.forEach((item) => {
-    preloadUrl(item.web + photoVersion);
-    preloadUrl(item.save + photoVersion);
+function warmupAllLitePhotos() {
+  yearOrder.forEach((year) => {
+    const list = photoData[year] || [];
+    list.forEach((item) => preloadUrl(item.web + photoVersion));
   });
 }
 
@@ -120,7 +115,6 @@ function renderYearButtons() {
       currentIndex = 0;
       renderYearButtons();
       renderPhoto();
-      warmupYear(currentYear);
     });
     yearsWrap.appendChild(b);
   });
@@ -130,25 +124,37 @@ function renderPhoto() {
   const list = photoData[currentYear] || [];
   if (!photoDisplay || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
   const item = list[currentIndex];
+
+  switchingPhoto = true;
+  photoPrev.disabled = true;
+  photoNext.disabled = true;
   photoDisplay.src = item.web + photoVersion;
-  currentSave = item.save;
+
   currentOriginal = item.original;
+  currentSize = item.size;
   photoDisplay.alt = currentYear + '年合照';
 
   const multiple = list.length > 1;
+  photoDisplay.onload = () => {
+    switchingPhoto = false;
+    photoPrev.disabled = !multiple;
+    photoNext.disabled = !multiple;
+  };
+
+  if (photoDownloadOriginal) {
+    photoDownloadOriginal.href = currentOriginal + photoVersion;
+    photoDownloadOriginal.textContent = `点击下载原图（${currentSize}）`;
+  }
+
   photoPrev.style.visibility = multiple ? 'visible' : 'hidden';
   photoNext.style.visibility = multiple ? 'visible' : 'hidden';
-  photoPrev.disabled = !multiple;
-  photoNext.disabled = !multiple;
   photoEmpty.textContent = multiple ? ('当前第 ' + (currentIndex + 1) + ' / ' + list.length + ' 张') : '该年份暂无更多照片';
 
-  list.forEach((x) => {
-    preloadUrl(x.web + photoVersion);
-    preloadUrl(x.save + photoVersion);
-  });
+  list.forEach((x) => preloadUrl(x.web + photoVersion));
 }
 
 photoPrev?.addEventListener('click', () => {
+  if (switchingPhoto) return;
   const list = photoData[currentYear] || [];
   if (list.length <= 1) return;
   currentIndex = (currentIndex - 1 + list.length) % list.length;
@@ -156,30 +162,13 @@ photoPrev?.addEventListener('click', () => {
 });
 
 photoNext?.addEventListener('click', () => {
+  if (switchingPhoto) return;
   const list = photoData[currentYear] || [];
   if (list.length <= 1) return;
   currentIndex = (currentIndex + 1) % list.length;
   renderPhoto();
 });
 
-photoOriginal?.addEventListener('click', () => {
-  if (!photoModal || !photoModalImage || !photoSaveOriginal) return;
-  photoModalImage.src = currentSave + photoVersion;
-  photoSaveOriginal.href = currentOriginal + photoVersion;
-  photoModal.classList.add('open');
-  photoModal.setAttribute('aria-hidden', 'false');
-});
-
-function closePhotoModal() {
-  if (!photoModal) return;
-  photoModal.classList.remove('open');
-  photoModal.setAttribute('aria-hidden', 'true');
-}
-
-photoModalMask?.addEventListener('click', closePhotoModal);
-photoModalClose?.addEventListener('click', closePhotoModal);
-
 renderYearButtons();
 renderPhoto();
-warmupYear(currentYear);
-if (yearOrder.length > 1) warmupYear(yearOrder[1]);
+warmupAllLitePhotos();
