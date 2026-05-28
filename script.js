@@ -26,7 +26,7 @@ const photoData = {
   '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg', size: '8.4MB' }]
 };
 
-const photoVersion = '?v=20260528h';
+const photoVersion = '?v=20260528i';
 const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
