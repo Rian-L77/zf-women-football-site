@@ -8,22 +8,22 @@ const copyTip = document.getElementById('copyTip');
 const honorToggles = document.querySelectorAll('.honor-toggle');
 
 const photoData = {
-  '2026': [{ web: './web-hero-main.jpg', original: './hero-main.jpg' }],
-  '2025': [{ web: './web-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
+  '2026': [{ web: './lite-hero-main.jpg', original: './hero-main.jpg' }],
+  '2025': [{ web: './lite-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
   '2024': [
-    { web: './web-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
-    { web: './web-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
-    { web: './web-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
+    { web: './lite-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
+    { web: './lite-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
+    { web: './lite-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
   ],
   '2023': [
-    { web: './web-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
-    { web: './web-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
+    { web: './lite-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
+    { web: './lite-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
   ],
   '2022': [
-    { web: './web-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
-    { web: './web-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
+    { web: './lite-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
+    { web: './lite-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
   ],
-  '2021': [{ web: './web-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
+  '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
 };
 
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
@@ -41,7 +41,7 @@ const photoModal = document.getElementById('photoModal');
 const photoModalMask = document.getElementById('photoModalMask');
 const photoModalClose = document.getElementById('photoModalClose');
 const photoModalImage = document.getElementById('photoModalImage');
-const photoVersion = '?v=20260528b';
+const photoVersion = '?v=20260528c';
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
