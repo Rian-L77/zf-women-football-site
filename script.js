@@ -9,21 +9,21 @@ const honorToggles = document.querySelectorAll('.honor-toggle');
 
 const photoData = {
   '2026': [{ web: './web-hero-main.jpg', original: './hero-main.jpg' }],
-  '2025': [{ web: './web-25首高.jpg', original: './25首高.jpg' }],
+  '2025': [{ web: './web-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
   '2024': [
-    { web: './web-24全国赛1.jpg', original: './24全国赛1.jpg' },
-    { web: './web-24全国赛2.jpg', original: './24全国赛2.jpg' },
-    { web: './web-24全国赛人马.jpg', original: './24全国赛人马.jpg' }
+    { web: './web-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
+    { web: './web-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
+    { web: './web-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
   ],
   '2023': [
-    { web: './web-23年大合照.jpg', original: './23年大合照.jpg' },
-    { web: './web-23首高合照.jpg', original: './23首高合照.jpg' }
+    { web: './web-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
+    { web: './web-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
   ],
   '2022': [
-    { web: './web-22小合照1.jpg', original: './22小合照1.jpg' },
-    { web: './web-22小合照2.jpg', original: './22小合照2.jpg' }
+    { web: './web-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
+    { web: './web-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
   ],
-  '2021': [{ web: './web-21首高五人制.jpg', original: './21首高五人制.jpg' }]
+  '2021': [{ web: './web-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
 };
 
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
