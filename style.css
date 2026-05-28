@@ -425,10 +425,28 @@ body {
 }
 
 .photo-save-tip {
-  justify-self: end;
+  justify-self: start;
   margin: .4rem 0 0;
   color: #7a1010;
   font-weight: 700;
+}
+
+.photo-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+  margin-top: .45rem;
+}
+
+.photo-save-btn {
+  border: 0;
+  background: #b91c1c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: .55rem .9rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .cta {

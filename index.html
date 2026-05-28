@@ -193,7 +193,7 @@
           <img id="photoDisplay" src="./lite-hero-main.jpg" alt="历年合照" loading="eager" decoding="async" />
           <button class="photo-nav" id="photoNext" type="button" aria-label="下一张">›</button>
         </div>
-        <p class="photo-actions"><button id="photoOriginal" class="photo-original-btn" type="button">查看原图</button></p>
+        <p class="photo-actions"><button id="photoOriginal" class="photo-original-btn" type="button">查看高清图</button></p>
         <div class="photo-empty" id="photoEmpty">该年份暂无更多照片</div>
       </div>
     </section>
@@ -203,8 +203,9 @@
       <div class="photo-modal-body">
         <button class="photo-modal-close" id="photoModalClose" type="button" aria-label="关闭">×</button>
         <img id="photoModalImage" src="" alt="原图预览" />
-        <p class="photo-save-tip">长按图片保存到相册</p>
-      </div>
+        <div class="photo-modal-actions">
+          <a id="photoSaveOriginal" class="photo-save-btn" href="#" download>保存原图</a>
+        </div></div>
     </div>
 
     <section class="section cta" id="join">

@@ -8,29 +8,30 @@ const copyTip = document.getElementById('copyTip');
 const honorToggles = document.querySelectorAll('.honor-toggle');
 
 const photoData = {
-  '2026': [{ web: './lite-hero-main.jpg', original: './hero-main.jpg' }],
-  '2025': [{ web: './lite-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
+  '2026': [{ web: './lite-hero-main.jpg', save: './save-hero-main.jpg', original: './hero-main.jpg' }],
+  '2025': [{ web: './lite-photo-2025-1.jpg', save: './save-photo-2025-1.jpg', original: './photo-2025-1.jpg' }],
   '2024': [
-    { web: './lite-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
-    { web: './lite-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
-    { web: './lite-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
+    { web: './lite-photo-2024-1.jpg', save: './save-photo-2024-1.jpg', original: './photo-2024-1.jpg' },
+    { web: './lite-photo-2024-2.jpg', save: './save-photo-2024-2.jpg', original: './photo-2024-2.jpg' },
+    { web: './lite-photo-2024-3.jpg', save: './save-photo-2024-3.jpg', original: './photo-2024-3.jpg' }
   ],
   '2023': [
-    { web: './lite-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
-    { web: './lite-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
+    { web: './lite-photo-2023-1.jpg', save: './save-photo-2023-1.jpg', original: './photo-2023-1.jpg' },
+    { web: './lite-photo-2023-2.jpg', save: './save-photo-2023-2.jpg', original: './photo-2023-2.jpg' }
   ],
   '2022': [
-    { web: './lite-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
-    { web: './lite-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
+    { web: './lite-photo-2022-1.jpg', save: './save-photo-2022-1.jpg', original: './photo-2022-1.jpg' },
+    { web: './lite-photo-2022-2.jpg', save: './save-photo-2022-2.jpg', original: './photo-2022-2.jpg' }
   ],
-  '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
+  '2021': [{ web: './lite-photo-2021-1.jpg', save: './save-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
 };
 
-const photoVersion = '?v=20260528d';
+const photoVersion = '?v=20260528e';
 const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
 let currentIndex = 0;
+let currentSave = './save-hero-main.jpg';
 let currentOriginal = './hero-main.jpg';
 
 const yearsWrap = document.getElementById('photoYears');
@@ -43,6 +44,7 @@ const photoModal = document.getElementById('photoModal');
 const photoModalMask = document.getElementById('photoModalMask');
 const photoModalClose = document.getElementById('photoModalClose');
 const photoModalImage = document.getElementById('photoModalImage');
+const photoSaveOriginal = document.getElementById('photoSaveOriginal');
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -99,7 +101,10 @@ function preloadUrl(url) {
 
 function warmupYear(year) {
   const list = photoData[year] || [];
-  list.forEach((item) => preloadUrl(item.web + photoVersion));
+  list.forEach((item) => {
+    preloadUrl(item.web + photoVersion);
+    preloadUrl(item.save + photoVersion);
+  });
 }
 
 function renderYearButtons() {
@@ -126,6 +131,7 @@ function renderPhoto() {
   if (!photoDisplay || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
   const item = list[currentIndex];
   photoDisplay.src = item.web + photoVersion;
+  currentSave = item.save;
   currentOriginal = item.original;
   photoDisplay.alt = currentYear + '年合照';
 
@@ -136,7 +142,10 @@ function renderPhoto() {
   photoNext.disabled = !multiple;
   photoEmpty.textContent = multiple ? ('当前第 ' + (currentIndex + 1) + ' / ' + list.length + ' 张') : '该年份暂无更多照片';
 
-  list.forEach((x) => preloadUrl(x.web + photoVersion));
+  list.forEach((x) => {
+    preloadUrl(x.web + photoVersion);
+    preloadUrl(x.save + photoVersion);
+  });
 }
 
 photoPrev?.addEventListener('click', () => {
@@ -154,8 +163,9 @@ photoNext?.addEventListener('click', () => {
 });
 
 photoOriginal?.addEventListener('click', () => {
-  if (!photoModal || !photoModalImage) return;
-  photoModalImage.src = currentOriginal + photoVersion;
+  if (!photoModal || !photoModalImage || !photoSaveOriginal) return;
+  photoModalImage.src = currentSave + photoVersion;
+  photoSaveOriginal.href = currentOriginal + photoVersion;
   photoModal.classList.add('open');
   photoModal.setAttribute('aria-hidden', 'false');
 });
