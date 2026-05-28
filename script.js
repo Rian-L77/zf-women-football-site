@@ -29,6 +29,7 @@ const photoData = {
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
 let currentIndex = 0;
+let currentOriginal = './hero-main.jpg';
 
 const yearsWrap = document.getElementById('photoYears');
 const photoDisplay = document.getElementById('photoDisplay');
@@ -36,6 +37,11 @@ const photoOriginal = document.getElementById('photoOriginal');
 const photoPrev = document.getElementById('photoPrev');
 const photoNext = document.getElementById('photoNext');
 const photoEmpty = document.getElementById('photoEmpty');
+const photoModal = document.getElementById('photoModal');
+const photoModalMask = document.getElementById('photoModalMask');
+const photoModalClose = document.getElementById('photoModalClose');
+const photoModalImage = document.getElementById('photoModalImage');
+const photoSaveBtn = document.getElementById('photoSaveBtn');
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -103,10 +109,10 @@ function renderYearButtons() {
 
 function renderPhoto() {
   const list = photoData[currentYear] || [];
-  if (!photoDisplay || !photoOriginal || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
+  if (!photoDisplay || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
   const item = list[currentIndex];
   photoDisplay.src = item.web;
-  photoOriginal.href = item.original;
+  currentOriginal = item.original;
   photoDisplay.alt = currentYear + '年合照';
 
   const multiple = list.length > 1;
@@ -130,6 +136,23 @@ photoNext?.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % list.length;
   renderPhoto();
 });
+
+photoOriginal?.addEventListener('click', () => {
+  if (!photoModal || !photoModalImage || !photoSaveBtn) return;
+  photoModalImage.src = currentOriginal;
+  photoSaveBtn.href = currentOriginal;
+  photoModal.classList.add('open');
+  photoModal.setAttribute('aria-hidden', 'false');
+});
+
+function closePhotoModal() {
+  if (!photoModal) return;
+  photoModal.classList.remove('open');
+  photoModal.setAttribute('aria-hidden', 'true');
+}
+
+photoModalMask?.addEventListener('click', closePhotoModal);
+photoModalClose?.addEventListener('click', closePhotoModal);
 
 renderYearButtons();
 renderPhoto();

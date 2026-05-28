@@ -193,13 +193,19 @@
           <img id="photoDisplay" src="./web-hero-main.jpg" alt="历年合照" loading="eager" decoding="async" />
           <button class="photo-nav" id="photoNext" type="button" aria-label="下一张">›</button>
         </div>
-        <p class="photo-actions"><a id="photoOriginal" href="./hero-main.jpg" target="_blank" rel="noopener">查看原图</a></p>
+        <p class="photo-actions"><button id="photoOriginal" class="photo-original-btn" type="button">查看原图</button></p>
         <div class="photo-empty" id="photoEmpty">该年份暂无更多照片</div>
       </div>
     </section>
-        </div>
+
+    <div class="photo-modal" id="photoModal" aria-hidden="true">
+      <div class="photo-modal-mask" id="photoModalMask"></div>
+      <div class="photo-modal-body">
+        <button class="photo-modal-close" id="photoModalClose" type="button" aria-label="关闭">×</button>
+        <img id="photoModalImage" src="" alt="原图预览" />
+        <a id="photoSaveBtn" class="photo-save-btn" href="#" download>保存图片</a>
       </div>
-    </section>
+    </div>
 
     <section class="section cta" id="join">
       <div class="container cta-wrap">
