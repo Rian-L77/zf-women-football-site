@@ -26,6 +26,8 @@ const photoData = {
   '2021': [{ web: './lite-photo-2021-1.jpg', original: './photo-2021-1.jpg' }]
 };
 
+const photoVersion = '?v=20260528d';
+const preloadCache = new Set();
 const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
 let currentYear = '2026';
 let currentIndex = 0;
@@ -41,7 +43,6 @@ const photoModal = document.getElementById('photoModal');
 const photoModalMask = document.getElementById('photoModalMask');
 const photoModalClose = document.getElementById('photoModalClose');
 const photoModalImage = document.getElementById('photoModalImage');
-const photoVersion = '?v=20260528c';
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -89,6 +90,18 @@ copyWechatBtn?.addEventListener('click', async () => {
   }
 });
 
+function preloadUrl(url) {
+  if (!url || preloadCache.has(url)) return;
+  const img = new Image();
+  img.src = url;
+  preloadCache.add(url);
+}
+
+function warmupYear(year) {
+  const list = photoData[year] || [];
+  list.forEach((item) => preloadUrl(item.web + photoVersion));
+}
+
 function renderYearButtons() {
   if (!yearsWrap) return;
   yearsWrap.innerHTML = '';
@@ -102,6 +115,7 @@ function renderYearButtons() {
       currentIndex = 0;
       renderYearButtons();
       renderPhoto();
+      warmupYear(currentYear);
     });
     yearsWrap.appendChild(b);
   });
@@ -121,6 +135,8 @@ function renderPhoto() {
   photoPrev.disabled = !multiple;
   photoNext.disabled = !multiple;
   photoEmpty.textContent = multiple ? ('当前第 ' + (currentIndex + 1) + ' / ' + list.length + ' 张') : '该年份暂无更多照片';
+
+  list.forEach((x) => preloadUrl(x.web + photoVersion));
 }
 
 photoPrev?.addEventListener('click', () => {
@@ -155,3 +171,5 @@ photoModalClose?.addEventListener('click', closePhotoModal);
 
 renderYearButtons();
 renderPhoto();
+warmupYear(currentYear);
+if (yearOrder.length > 1) warmupYear(yearOrder[1]);
