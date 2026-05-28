@@ -356,12 +356,14 @@ body {
 
 .photo-actions {
   margin: .7rem 0 0;
+  text-align: center;
 }
 
 .photo-download-note {
   margin: .35rem 0 0;
   color: #8f1212;
   font-size: .9rem;
+  text-align: center;
 }
 
 .photo-actions a {
@@ -380,9 +382,10 @@ body {
 }
 
 .photo-empty {
-  margin-top: .35rem;
+  margin-top: .55rem;
   color: #7f4a4a;
   font-size: .92rem;
+  text-align: center;
 }
 
 .photo-modal {
