@@ -7,15 +7,42 @@ const wechatId = document.getElementById('wechatId');
 const copyTip = document.getElementById('copyTip');
 const honorToggles = document.querySelectorAll('.honor-toggle');
 
-menuBtn?.addEventListener('click', () => {
-  nav.classList.toggle('open');
-});
+const photoData = {
+  '2026': [{ web: './web-hero-main.jpg', original: './hero-main.jpg' }],
+  '2025': [{ web: './web-25首高.jpg', original: './25首高.jpg' }],
+  '2024': [
+    { web: './web-24全国赛1.jpg', original: './24全国赛1.jpg' },
+    { web: './web-24全国赛2.jpg', original: './24全国赛2.jpg' },
+    { web: './web-24全国赛人马.jpg', original: './24全国赛人马.jpg' }
+  ],
+  '2023': [
+    { web: './web-23年大合照.jpg', original: './23年大合照.jpg' },
+    { web: './web-23首高合照.jpg', original: './23首高合照.jpg' }
+  ],
+  '2022': [
+    { web: './web-22小合照1.jpg', original: './22小合照1.jpg' },
+    { web: './web-22小合照2.jpg', original: './22小合照2.jpg' }
+  ],
+  '2021': [{ web: './web-21首高五人制.jpg', original: './21首高五人制.jpg' }]
+};
+
+const yearOrder = Object.keys(photoData).sort((a, b) => Number(b) - Number(a));
+let currentYear = '2026';
+let currentIndex = 0;
+
+const yearsWrap = document.getElementById('photoYears');
+const photoDisplay = document.getElementById('photoDisplay');
+const photoOriginal = document.getElementById('photoOriginal');
+const photoPrev = document.getElementById('photoPrev');
+const photoNext = document.getElementById('photoNext');
+const photoEmpty = document.getElementById('photoEmpty');
+
+menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
 switchBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
     switchBtns.forEach((b) => b.classList.remove('active'));
     playerPanels.forEach((panel) => panel.classList.remove('active'));
-
     btn.classList.add('active');
     const target = btn.getAttribute('data-target');
     document.getElementById(target)?.classList.add('active');
@@ -27,7 +54,6 @@ honorToggles.forEach((btn) => {
     const targetId = btn.getAttribute('data-target');
     const panel = document.getElementById(targetId);
     const expanded = btn.getAttribute('aria-expanded') === 'true';
-
     btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     btn.classList.toggle('active', !expanded);
     panel?.classList.toggle('active', !expanded);
@@ -36,14 +62,12 @@ honorToggles.forEach((btn) => {
 
 copyWechatBtn?.addEventListener('click', async () => {
   const text = wechatId?.textContent?.trim() || 'Dream_Lars';
-
   try {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
       copyTip.textContent = '复制成功';
       return;
     }
-
     const area = document.createElement('textarea');
     area.value = text;
     area.style.position = 'fixed';
@@ -58,3 +82,54 @@ copyWechatBtn?.addEventListener('click', async () => {
     copyTip.textContent = '复制失败，请手动复制: ' + text;
   }
 });
+
+function renderYearButtons() {
+  if (!yearsWrap) return;
+  yearsWrap.innerHTML = '';
+  yearOrder.forEach((year) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = year;
+    b.className = 'year-btn' + (year === currentYear ? ' active' : '');
+    b.addEventListener('click', () => {
+      currentYear = year;
+      currentIndex = 0;
+      renderYearButtons();
+      renderPhoto();
+    });
+    yearsWrap.appendChild(b);
+  });
+}
+
+function renderPhoto() {
+  const list = photoData[currentYear] || [];
+  if (!photoDisplay || !photoOriginal || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
+  const item = list[currentIndex];
+  photoDisplay.src = item.web;
+  photoOriginal.href = item.original;
+  photoDisplay.alt = currentYear + '年合照';
+
+  const multiple = list.length > 1;
+  photoPrev.style.visibility = multiple ? 'visible' : 'hidden';
+  photoNext.style.visibility = multiple ? 'visible' : 'hidden';
+  photoPrev.disabled = !multiple;
+  photoNext.disabled = !multiple;
+  photoEmpty.textContent = multiple ? ('当前第 ' + (currentIndex + 1) + ' / ' + list.length + ' 张') : '该年份暂无更多照片';
+}
+
+photoPrev?.addEventListener('click', () => {
+  const list = photoData[currentYear] || [];
+  if (list.length <= 1) return;
+  currentIndex = (currentIndex - 1 + list.length) % list.length;
+  renderPhoto();
+});
+
+photoNext?.addEventListener('click', () => {
+  const list = photoData[currentYear] || [];
+  if (list.length <= 1) return;
+  currentIndex = (currentIndex + 1) % list.length;
+  renderPhoto();
+});
+
+renderYearButtons();
+renderPhoto();

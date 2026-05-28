@@ -299,6 +299,76 @@ body {
   background: linear-gradient(180deg, #fff3f3, #ffe6e6);
 }
 
+.photo-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 1rem;
+}
+
+.year-btn {
+  border: 1px solid #d27a7a;
+  background: #fff;
+  color: #7a1010;
+  border-radius: 999px;
+  padding: .45rem .9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.year-btn.active {
+  background: #b91c1c;
+  color: #fff;
+  border-color: #b91c1c;
+}
+
+.photo-viewer {
+  padding: .7rem;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  gap: .5rem;
+}
+
+.photo-viewer img {
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.photo-nav {
+  border: 0;
+  background: #b91c1c;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.photo-nav:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.photo-actions {
+  margin: .7rem 0 0;
+}
+
+.photo-actions a {
+  color: #8f1212;
+  font-weight: 700;
+}
+
+.photo-empty {
+  margin-top: .35rem;
+  color: #7f4a4a;
+  font-size: .92rem;
+}
+
 .cta {
   background: linear-gradient(120deg, var(--deep), #b91c1c);
   color: #fff;
