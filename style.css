@@ -356,11 +356,17 @@ body {
 
 .photo-actions {
   margin: .7rem 0 0;
+  width: 100%;
   text-align: center;
+}
+
+.photo-original-btn {
+  display: inline-block;
 }
 
 .photo-download-note {
   margin: .35rem 0 0;
+  width: 100%;
   color: #8f1212;
   font-size: .9rem;
   text-align: center;
@@ -383,6 +389,7 @@ body {
 
 .photo-empty {
   margin-top: .55rem;
+  width: 100%;
   color: #7f4a4a;
   font-size: .92rem;
   text-align: center;
