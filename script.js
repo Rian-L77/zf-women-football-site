@@ -41,7 +41,7 @@ const photoModal = document.getElementById('photoModal');
 const photoModalMask = document.getElementById('photoModalMask');
 const photoModalClose = document.getElementById('photoModalClose');
 const photoModalImage = document.getElementById('photoModalImage');
-const photoSaveBtn = document.getElementById('photoSaveBtn');
+const photoVersion = '?v=20260528b';
 
 menuBtn?.addEventListener('click', () => nav.classList.toggle('open'));
 
@@ -111,7 +111,7 @@ function renderPhoto() {
   const list = photoData[currentYear] || [];
   if (!photoDisplay || !photoPrev || !photoNext || !photoEmpty || !list.length) return;
   const item = list[currentIndex];
-  photoDisplay.src = item.web;
+  photoDisplay.src = item.web + photoVersion;
   currentOriginal = item.original;
   photoDisplay.alt = currentYear + '年合照';
 
@@ -138,9 +138,8 @@ photoNext?.addEventListener('click', () => {
 });
 
 photoOriginal?.addEventListener('click', () => {
-  if (!photoModal || !photoModalImage || !photoSaveBtn) return;
-  photoModalImage.src = currentOriginal;
-  photoSaveBtn.href = currentOriginal;
+  if (!photoModal || !photoModalImage) return;
+  photoModalImage.src = currentOriginal + photoVersion;
   photoModal.classList.add('open');
   photoModal.setAttribute('aria-hidden', 'false');
 });
